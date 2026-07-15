@@ -1,0 +1,17 @@
+cc_binary {
+    name: "android.hardware.ir-service.xiaomi_lmi",
+    relative_install_path: "hw",
+    vendor: true,
+    init_rc: ["android.hardware.ir-service.xiaomi_lmi.rc"],
+    vintf_fragments: ["android.hardware.ir-service.xiaomi_lmi.xml"],
+    srcs: [
+        "ConsumerIr.cpp",
+        "service.cpp",
+    ],
+    shared_libs: [
+        "libbase",
+        "libbinder_ndk",
+        "liblog",
+        "android.hardware.ir-V1-ndk",
+    ],
+}

@@ -38,6 +38,10 @@ PRODUCT_PACKAGES += \
 # Init
 $(call soong_config_set,xiaomi_kona,variant_lib,//$(LOCAL_PATH):libvariant_xiaomi_lmi)
 
+# IR
+PRODUCT_PACKAGES += \
+    android.hardware.ir-service.xiaomi_lmi
+
 # Overlays
 PRODUCT_PACKAGES += \
     ApertureOverlayDevice \

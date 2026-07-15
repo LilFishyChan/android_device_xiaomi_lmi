@@ -1,0 +1,5 @@
+service android.hardware.ir-service /vendor/bin/hw/android.hardware.ir-service.xiaomi_lmi
+    interface aidl android.hardware.ir.IConsumerIr/default
+    class hal
+    user system
+    group system
