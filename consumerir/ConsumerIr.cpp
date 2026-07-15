@@ -27,7 +27,7 @@
 // ---- MIUI HAL constants (from reverse-engineered consumerir.default.so) ----
 
 // timing → bit-count conversion: bit_count ≈ total_us * 1920 * K / 2^38
-static constexpr int32_t  kTimingBase       = 1920;       // 0x780
+static constexpr int32_t  kTimingBase       = 758;       // calibrated for lmi SPI clock
 static constexpr int64_t  kBitCountMul      = 0x10624dd3LL;
 static constexpr int32_t  kBitCountShift    = 38;
 static constexpr int32_t  kAlignMask        = 0x3FF;      // align to 1024
