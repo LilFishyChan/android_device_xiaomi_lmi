@@ -146,13 +146,17 @@ ConsumerIr::~ConsumerIr() {
         if (pat_idx & 1) {
             // odd interval → OFF (space between carrier bursts)
             duty_cnt = 0;
+            // Inverted: drive output HIGH during OFF period
+            marker[slot] = 1;
+            output[output_idx] |= (1U << bit_shift);
         } else {
             // even interval → ON (carrier modulated)
             duty_cnt++;
             if (duty_cnt >= duty_limit) {
                 duty_cnt = 0;
             }
-            if (duty_cnt < (duty_limit >> 1)) {
+            // Inverted: drive output LOW during ON period
+            if (duty_cnt >= (duty_limit >> 1)) {
                 marker[slot] = 1;
                 output[output_idx] |= (1U << bit_shift);
             }
