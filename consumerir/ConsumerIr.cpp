@@ -166,7 +166,9 @@ ConsumerIr::~ConsumerIr() {
     }
 
     // ---- Step 6: SPI transfer ----
-    uint32_t xfer_len = bit_count * sizeof(uint32_t);
+    // only transfer the actual populated words, not the full slot count
+    uint32_t word_count = output_idx + 1;
+    uint32_t xfer_len = word_count * sizeof(uint32_t);
     if (ioctl(mFd, LIRC_SET_SEND_MODE, &xfer_len) < 0) {
         LOG(ERROR) << "ir-spi set length error: " << strerror(errno);
         return ::ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_STATE);
@@ -178,7 +180,8 @@ ConsumerIr::~ConsumerIr() {
         return ::ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_STATE);
     }
 
-    LOG(INFO) << "Transmitted " << bit_count << " slots at " << carrierFreqHz << " Hz";
+    LOG(INFO) << "Transmitted " << word_count << " words (" << bit_count << " slots) at "
+              << carrierFreqHz << " Hz";
     return ::ndk::ScopedAStatus::ok();
 }
 
